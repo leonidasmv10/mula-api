@@ -1,0 +1,6 @@
+@MulaApi_HostAddress = http://localhost:5290
+
+GET {{MulaApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
