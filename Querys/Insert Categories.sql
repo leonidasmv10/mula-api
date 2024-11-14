@@ -1,5 +1,6 @@
 INSERT INTO [dbo].[Categories] (Name) 
 VALUES
+('General'),
 ('General Knowledge'),
 ('Entertainment: Books'),
 ('Entertainment: Film'),
