@@ -15,13 +15,13 @@ namespace MulaApi.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +43,7 @@ namespace MulaApi.Migrations
                 name: "GameResults",
                 columns: table => new
                 {
-                    GameResultId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CorrectAnswers = table.Column<int>(type: "int", nullable: false),
@@ -52,7 +52,7 @@ namespace MulaApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameResults", x => x.GameResultId);
+                    table.PrimaryKey("PK_GameResults", x => x.Id);
                     table.ForeignKey(
                         name: "FK_GameResults_Users_UserId",
                         column: x => x.UserId,

@@ -19,7 +19,7 @@ Ejemplo:
 
 dotnet aspnet-codegenerator controller -name NombreControlador -async -api -m NombreModelo -dc ApplicationDbContext -outDir Controllers
 
-dotnet aspnet-codegenerator controller -name UserController -async -api -m User -dc ApplicationDbContext -outDir Controllers
+dotnet aspnet-codegenerator controller -name UsersController -async -api -m User -dc ApplicationDbContext -outDir Controllers
 
 
 Crear una migración:
