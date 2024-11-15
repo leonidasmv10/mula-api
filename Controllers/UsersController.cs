@@ -58,9 +58,9 @@ namespace MulaApi.Controllers
             }
 
             _context.Entry(user).State = EntityState.Modified;
-			user.Password = _passwordHasher.HashPassword(user, user.Password);
+            user.Password = _passwordHasher.HashPassword(user, user.Password);
 
-			try
+            try
             {
                 await _context.SaveChangesAsync();
             }

@@ -73,8 +73,8 @@ public class Program
                 var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>();
 
                 // Reinicialitza la base de dades i aplica les migracions
-                db.Database.EnsureDeleted();
-                db.Database.Migrate();
+                // db.Database.EnsureDeleted();
+                // db.Database.Migrate();
 
                 // Usuari administrador de prova
                 if (!db.Users.Any(u => u.Username == "admin"))
