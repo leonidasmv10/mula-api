@@ -4,7 +4,9 @@ AS
 BEGIN
     SELECT 
         UserId,
-        AVG(CorrectAnswers) AS AverageCorrectAnswers
+        COUNT(*) AS TotalGamesPlayed,
+        CAST(AVG(CorrectAnswers * 1.0) AS FLOAT) AS AverageCorrectAnswers,
+        CAST((SUM(CorrectAnswers) * 1.0 / (COUNT(*) * 10)) * 100 AS FLOAT) AS SuccessRate
     FROM 
         GameResults
     WHERE 
@@ -13,13 +15,17 @@ BEGIN
         UserId;
 END;
 
+
+
+EXEC sp_GetUserPersonalStats @UserId = 1
+
 CREATE PROCEDURE sp_GetUserCategoryStats
     @UserId INT
 AS
 BEGIN
     SELECT 
         CategoryId,
-        AVG(CorrectAnswers) AS AverageCorrectAnswers
+        CAST(AVG(CorrectAnswers * 1.0) AS FLOAT) AS AverageCorrectAnswers
     FROM 
         GameResults
     WHERE 
@@ -28,12 +34,14 @@ BEGIN
         CategoryId;
 END;
 
+EXEC sp_GetUserCategoryStats @UserId = 1
+
 CREATE PROCEDURE sp_GetGlobalRanking
 AS
 BEGIN
     SELECT 
         UserId,
-        AVG(CorrectAnswers) AS AverageCorrectAnswers
+        CAST(AVG(CorrectAnswers * 1.0) AS FLOAT) AS AverageCorrectAnswers
     FROM 
         GameResults
     GROUP BY 
@@ -49,7 +57,7 @@ AS
 BEGIN
     SELECT 
         UserId,
-        AVG(CorrectAnswers) AS AverageCorrectAnswers
+        CAST(AVG(CorrectAnswers * 1.0) AS FLOAT) AS AverageCorrectAnswers
     FROM 
         GameResults
     WHERE 
@@ -59,3 +67,4 @@ BEGIN
     ORDER BY 
         AverageCorrectAnswers DESC;
 END;
+

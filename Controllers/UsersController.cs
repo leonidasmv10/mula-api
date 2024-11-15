@@ -14,7 +14,7 @@ namespace MulaApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    [Authorize(Policy = "AdminOnly")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -35,6 +35,7 @@ namespace MulaApi.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);

@@ -12,7 +12,7 @@ namespace MulaApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    [Authorize(Policy = "AdminOnly")]
+    [Authorize]
     public class TriviaController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +26,7 @@ namespace MulaApi.Controllers
 
         // GET: api/Trivia/questions/{categoryId}
         [HttpGet("questions/{categoryId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetTrivia(int categoryId)
         {
             try
@@ -49,6 +50,7 @@ namespace MulaApi.Controllers
 
 
         [HttpPost("games")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(GameResult gameResult)
         {
             _context.GameResults.Add(gameResult);
@@ -84,7 +86,9 @@ namespace MulaApi.Controllers
                         userStats.Add(new UserStatsDto
                         {
                             UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                            AverageCorrectAnswers = reader.GetInt32(reader.GetOrdinal("AverageCorrectAnswers"))
+                            AverageCorrectAnswers = reader.GetDouble(reader.GetOrdinal("AverageCorrectAnswers")),
+                            TotalGamesPlayed = reader.GetInt32(reader.GetOrdinal("TotalGamesPlayed")),
+                            SuccessRate = reader.GetDouble(reader.GetOrdinal("SuccessRate")),
                         });
                     }
                 }
@@ -136,7 +140,7 @@ namespace MulaApi.Controllers
                         userCategoryStats.Add(new UserCategoryStatsDto
                         {
                             CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                            AverageCorrectAnswers = reader.GetInt32(reader.GetOrdinal("AverageCorrectAnswers")) // Obtener el promedio
+                            AverageCorrectAnswers = reader.GetDouble(reader.GetOrdinal("AverageCorrectAnswers")) // Obtener el promedio
                         });
                     }
                 }
@@ -190,7 +194,7 @@ namespace MulaApi.Controllers
                         globalRanking.Add(new GlobalRankingDto
                         {
                             UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                            AverageCorrectAnswers = reader.GetInt32(reader.GetOrdinal("AverageCorrectAnswers"))
+                            AverageCorrectAnswers = reader.GetDouble(reader.GetOrdinal("AverageCorrectAnswers"))
                         });
                     }
                 }
@@ -250,7 +254,7 @@ namespace MulaApi.Controllers
                         categoryRanking.Add(new CategoryRankingDto
                         {
                             UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
-                            AverageCorrectAnswers = reader.GetInt32(reader.GetOrdinal("AverageCorrectAnswers"))
+                            AverageCorrectAnswers = reader.GetDouble(reader.GetOrdinal("AverageCorrectAnswers"))
                         });
                     }
                 }
